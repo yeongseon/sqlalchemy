@@ -23,14 +23,14 @@ cpython = platform.python_implementation() == "CPython"
 ext_modules = [
     Extension(
         "sqlalchemy.cprocessors",
-        sources=["lib/sqlalchemy/cextension/processors.c"],
+        sources=["sqlalchemy/cextension/processors.c"],
     ),
     Extension(
         "sqlalchemy.cresultproxy",
-        sources=["lib/sqlalchemy/cextension/resultproxy.c"],
+        sources=["sqlalchemy/cextension/resultproxy.c"],
     ),
     Extension(
-        "sqlalchemy.cutils", sources=["lib/sqlalchemy/cextension/utils.c"]
+        "sqlalchemy.cutils", sources=["sqlalchemy/cextension/utils.c"]
     ),
 ]
 
@@ -122,7 +122,7 @@ def status_msgs(*msgs):
 
 
 with open(
-    os.path.join(os.path.dirname(__file__), "lib", "sqlalchemy", "__init__.py")
+    os.path.join(os.path.dirname(__file__), "sqlalchemy", "__init__.py")
 ) as v_file:
     VERSION = (
         re.compile(r""".*__version__ = ["'](.*?)['"]""", re.S)
@@ -152,8 +152,7 @@ def run_setup(with_cext):
             "Documentation": "https://docs.sqlalchemy.org",
             "Issue Tracker": "https://github.com/sqlalchemy/sqlalchemy/",
         },
-        packages=find_packages("lib"),
-        package_dir={"": "lib"},
+        packages=find_packages("."),
         license="MIT",
         cmdclass=cmdclass,
         tests_require=[
